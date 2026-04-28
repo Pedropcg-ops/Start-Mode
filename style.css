@@ -1,237 +1,487 @@
-const STORAGE_KEY = "startModeLastSession";
-const INTRO_DURATION = 1800;
-const COFFEE_MINUTES = 5;
-
-const screens = {
-  intro: document.getElementById("introScreen"),
-  menu: document.getElementById("menuScreen"),
-  duration: document.getElementById("durationScreen"),
-  timer: document.getElementById("timerScreen"),
-  coffee: document.getElementById("coffeeScreen"),
-  complete: document.getElementById("completeScreen"),
-};
-
-const modeButtons = document.querySelectorAll("[data-mode]");
-const durationButtons = document.querySelectorAll("[data-minutes]");
-const selectedModeLabel = document.getElementById("selectedModeLabel");
-const menuLastSession = document.getElementById("menuLastSession");
-const durationLastSession = document.getElementById("durationLastSession");
-const customToggle = document.getElementById("customToggle");
-const customDuration = document.getElementById("customDuration");
-const customMinutes = document.getElementById("customMinutes");
-const minusMinutes = document.getElementById("minusMinutes");
-const plusMinutes = document.getElementById("plusMinutes");
-const startCustom = document.getElementById("startCustom");
-const timerModeLabel = document.getElementById("timerModeLabel");
-const timerDisplay = document.getElementById("timerDisplay");
-const motivationText = document.getElementById("motivationText");
-const pauseResume = document.getElementById("pauseResume");
-const finishSession = document.getElementById("finishSession");
-const coffeeTimer = document.getElementById("coffeeTimer");
-const coffeeTitle = document.getElementById("coffeeTitle");
-const coffeeSubtitle = document.getElementById("coffeeSubtitle");
-
-const motivations = [
-  "Una sesión. Una intención.",
-  "Empieza pequeño. Sigue constante.",
-  "Tu escritorio ya está listo. Ahora tú.",
-  "Hazlo fácil. Hazlo ahora.",
-  "No necesitas hacerlo perfecto. Solo empezar.",
-];
-
-let selectedMode = "";
-let selectedMinutes = 25;
-let timerInterval = null;
-let remainingSeconds = 0;
-let isPaused = false;
-let activeTimerType = "focus";
-
-function showScreen(name) {
-  Object.values(screens).forEach((screen) => screen.classList.remove("is-active"));
-  screens[name].classList.add("is-active");
+:root {
+  --bg: #101010;
+  --panel: #181818;
+  --panel-soft: #20201e;
+  --text: #f4f0e8;
+  --muted: #8f8a80;
+  --accent: #c8a24a;
+  --accent-soft: rgba(200, 162, 74, 0.16);
+  --line: rgba(244, 240, 232, 0.1);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-function formatTime(totalSeconds) {
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+* {
+  box-sizing: border-box;
 }
 
-function readLastSession() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY));
-  } catch {
-    return null;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 520px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% -20%, rgba(200, 162, 74, 0.12), transparent 34%),
+    linear-gradient(145deg, #121210 0%, #0d0d0d 100%);
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  height: 100%;
+  padding: max(22px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px) scale(0.985);
+  transition:
+    opacity 520ms var(--ease),
+    transform 520ms var(--ease);
+}
+
+.screen.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.screen-top {
+  width: min(100%, 640px);
+  margin: 0 auto;
+}
+
+.overline {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2 {
+  margin-bottom: 0;
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+h1 {
+  max-width: 11ch;
+  font-size: clamp(2.7rem, 13vw, 5.7rem);
+  font-weight: 760;
+}
+
+h2 {
+  font-size: clamp(2rem, 8vw, 4.4rem);
+  font-weight: 720;
+}
+
+.intro-screen {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.intro-screen h1 {
+  animation: introText 1.7s var(--ease) both;
+}
+
+.intro-screen .overline {
+  animation: introText 1.45s 160ms var(--ease) both;
+}
+
+.intro-mark {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(200, 162, 74, 0.28);
+  border-radius: 50%;
+  animation: markPulse 1.8s var(--ease) both;
+}
+
+.intro-mark::before,
+.intro-mark::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 240, 232, 0.12);
+}
+
+.intro-mark span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 42px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(200, 162, 74, 0.5);
+  transform-origin: left center;
+  animation: goldSweep 1.7s var(--ease) both;
+}
+
+.last-session {
+  min-height: 22px;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.mode-grid,
+.duration-grid {
+  display: grid;
+  width: min(100%, 640px);
+  margin: auto;
+  gap: 12px;
+}
+
+.mode-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mode-card,
+.duration-button,
+.primary-button,
+.secondary-button,
+.ghost-button,
+.step-button {
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 94px;
+  padding: 18px;
+  background: linear-gradient(145deg, rgba(32, 32, 30, 0.92), rgba(20, 20, 20, 0.96));
+  box-shadow: var(--shadow);
+}
+
+.mode-card-wide {
+  grid-column: 1 / -1;
+}
+
+.mode-name {
+  font-size: 1.25rem;
+  font-weight: 680;
+}
+
+.mode-desc {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.duration-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.duration-button {
+  background: var(--panel);
+  color: var(--text);
+  font-size: 1.18rem;
+  font-weight: 680;
+}
+
+.custom-toggle {
+  grid-column: 1 / -1;
+}
+
+.custom-duration {
+  display: grid;
+  grid-template-columns: 58px 1fr 58px;
+  width: min(100%, 640px);
+  margin: 0 auto;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.custom-duration[hidden] {
+  display: none;
+}
+
+.custom-input-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--muted);
+}
+
+.custom-input-wrap input {
+  width: 84px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.custom-start {
+  grid-column: 1 / -1;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button,
+.step-button {
+  padding: 0 18px;
+  font-weight: 700;
+}
+
+.primary-button {
+  border-color: rgba(200, 162, 74, 0.48);
+  background: var(--accent);
+  color: #14120e;
+}
+
+.secondary-button {
+  background: var(--text);
+  color: #111;
+}
+
+.ghost-button,
+.step-button {
+  background: rgba(244, 240, 232, 0.04);
+  color: var(--text);
+}
+
+.back-button {
+  width: auto;
+  min-height: 44px;
+  margin-bottom: 24px;
+  color: var(--muted);
+}
+
+.timer-screen,
+.coffee-screen,
+.complete-screen {
+  align-items: center;
+  text-align: center;
+}
+
+.timer-panel,
+.coffee-content,
+.complete-content {
+  margin: auto 0;
+}
+
+.timer-ring {
+  position: relative;
+  width: min(54vw, 240px);
+  aspect-ratio: 1;
+  margin: 0 auto 18px;
+  border: 1px solid rgba(200, 162, 74, 0.3);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 162, 74, 0.11), transparent 58%);
+}
+
+.timer-ring span {
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 240, 232, 0.12);
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.timer-display {
+  margin-bottom: 16px;
+  font-size: clamp(4.2rem, 20vw, 8rem);
+  font-weight: 780;
+  line-height: 0.92;
+  font-variant-numeric: tabular-nums;
+}
+
+.motivation,
+.coffee-content p,
+.complete-content p {
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(100%, 520px);
+  gap: 12px;
+}
+
+.coffee-content h2,
+.complete-content h2 {
+  margin-bottom: 14px;
+  font-size: clamp(3.2rem, 15vw, 6.5rem);
+}
+
+.coffee-timer {
+  margin-top: 34px;
+  color: var(--text) !important;
+  font-size: clamp(3rem, 16vw, 5.8rem) !important;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums;
+}
+
+.bottom-button {
+  width: min(100%, 520px);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) {
+  button:hover {
+    border-color: rgba(200, 162, 74, 0.58);
+    background-color: var(--panel-soft);
+  }
+
+  .primary-button:hover {
+    background: #d3ad57;
   }
 }
 
-function saveLastSession(mode, minutes) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, minutes }));
-  updateLastSessionText();
-}
+@media (min-width: 760px) {
+  .screen {
+    padding: 44px;
+  }
 
-function updateLastSessionText() {
-  const last = readLastSession();
-  const text = last ? `Última sesión: ${last.mode} · ${last.minutes} min` : "";
-  menuLastSession.textContent = text;
-  durationLastSession.textContent = text;
+  .mode-grid,
+  .duration-grid {
+    gap: 16px;
+  }
 
-  if (last?.minutes) {
-    customMinutes.value = last.minutes;
+  .mode-card {
+    min-height: 116px;
   }
 }
 
-function stopTimer() {
-  window.clearInterval(timerInterval);
-  timerInterval = null;
-}
-
-function tick() {
-  if (isPaused) return;
-
-  remainingSeconds -= 1;
-
-  if (activeTimerType === "coffee") {
-    coffeeTimer.textContent = formatTime(Math.max(remainingSeconds, 0)).replace(/^0/, "");
-  } else {
-    timerDisplay.textContent = formatTime(Math.max(remainingSeconds, 0));
+@media (max-height: 620px) {
+  .app-shell {
+    min-height: 100dvh;
   }
 
-  if (remainingSeconds <= 0) {
-    stopTimer();
-    if (activeTimerType === "coffee") {
-      completeCoffee();
-    } else {
-      showScreen("complete");
-    }
+  h2 {
+    font-size: clamp(1.75rem, 7vw, 3rem);
+  }
+
+  .mode-card {
+    min-height: 78px;
+    padding: 14px;
+  }
+
+  .timer-ring {
+    width: min(42vw, 160px);
   }
 }
 
-function startCountdown(minutes, type = "focus") {
-  stopTimer();
-  activeTimerType = type;
-  remainingSeconds = minutes * 60;
-  isPaused = false;
-  pauseResume.textContent = "Pausar";
-
-  if (type === "coffee") {
-    coffeeTimer.textContent = formatTime(remainingSeconds).replace(/^0/, "");
-  } else {
-    timerDisplay.textContent = formatTime(remainingSeconds);
-    timerModeLabel.textContent = `Modo: ${selectedMode}`;
-    motivationText.textContent = motivations[Math.floor(Math.random() * motivations.length)];
-    saveLastSession(selectedMode, minutes);
-    showScreen("timer");
+@keyframes introText {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-
-  timerInterval = window.setInterval(tick, 1000);
-}
-
-function startFocusSession(minutes) {
-  selectedMinutes = minutes;
-  startCountdown(minutes, "focus");
-}
-
-function openDuration(mode) {
-  selectedMode = mode;
-  selectedModeLabel.textContent = `Modo: ${mode}`;
-  customDuration.hidden = true;
-  showScreen("duration");
-}
-
-function openCoffee() {
-  stopTimer();
-  activeTimerType = "coffee";
-  coffeeTitle.textContent = "Disfruta.";
-  coffeeSubtitle.textContent = "Tómate este momento antes de empezar.";
-  showScreen("coffee");
-  startCountdown(COFFEE_MINUTES, "coffee");
-}
-
-function completeCoffee() {
-  coffeeTitle.textContent = "Ahora sí.";
-  coffeeSubtitle.textContent = "Vamos con ello.";
-  coffeeTimer.textContent = "0:00";
-}
-
-function getCustomMinutes() {
-  const value = Number.parseInt(customMinutes.value, 10);
-  return Math.min(Math.max(Number.isFinite(value) ? value : selectedMinutes, 1), 180);
-}
-
-modeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const mode = button.dataset.mode;
-    if (mode === "Café") {
-      openCoffee();
-      return;
-    }
-    openDuration(mode);
-  });
-});
-
-durationButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    startFocusSession(Number(button.dataset.minutes));
-  });
-});
-
-document.getElementById("backToMenuFromDuration").addEventListener("click", () => {
-  showScreen("menu");
-});
-
-customToggle.addEventListener("click", () => {
-  customDuration.hidden = !customDuration.hidden;
-  if (!customDuration.hidden) {
-    customMinutes.focus();
-    customMinutes.select();
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-});
+}
 
-minusMinutes.addEventListener("click", () => {
-  customMinutes.value = Math.max(getCustomMinutes() - 5, 1);
-});
-
-plusMinutes.addEventListener("click", () => {
-  customMinutes.value = Math.min(getCustomMinutes() + 5, 180);
-});
-
-startCustom.addEventListener("click", () => {
-  startFocusSession(getCustomMinutes());
-});
-
-pauseResume.addEventListener("click", () => {
-  isPaused = !isPaused;
-  pauseResume.textContent = isPaused ? "Reanudar" : "Pausar";
-});
-
-finishSession.addEventListener("click", () => {
-  stopTimer();
-  showScreen("menu");
-});
-
-document.getElementById("coffeeDone").addEventListener("click", () => {
-  stopTimer();
-  showScreen("menu");
-});
-
-document.getElementById("newSession").addEventListener("click", () => {
-  showScreen("duration");
-});
-
-document.getElementById("homeFromComplete").addEventListener("click", () => {
-  showScreen("menu");
-});
-
-window.addEventListener("visibilitychange", () => {
-  if (document.hidden) return;
-  if (activeTimerType === "focus") {
-    timerDisplay.textContent = formatTime(Math.max(remainingSeconds, 0));
+@keyframes markPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.86);
   }
-});
+  48% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0.82;
+    transform: scale(1);
+  }
+}
 
-updateLastSessionText();
+@keyframes goldSweep {
+  from {
+    transform: rotate(-90deg) translateX(0);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(270deg) translateX(0);
+    opacity: 1;
+  }
+}
 
-window.setTimeout(() => {
-  showScreen("menu");
-}, INTRO_DURATION);
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.58;
+  }
+  50% {
+    transform: scale(0.92);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
