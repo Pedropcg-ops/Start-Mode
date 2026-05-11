@@ -3,24 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#101010" />
-    <title>START MODE</title>
+    <meta name="theme-color" content="#11100e" />
+    <title>Encender la chispa</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="app-shell" aria-live="polite">
+      <div class="ember-field" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
       <section class="screen intro-screen is-active" id="introScreen" data-screen="intro">
-        <div class="intro-mark" aria-hidden="true">
+        <div class="focus-orb" aria-hidden="true">
           <span></span>
         </div>
-        <p class="overline">START MODE</p>
-        <h1>Activa tu modo inicio.</h1>
+        <h1>Encender la chispa</h1>
+        <p>Elige cómo quieres empezar.</p>
       </section>
 
       <section class="screen menu-screen" id="menuScreen" data-screen="menu">
-        <div class="screen-top">
-          <p class="overline">START MODE</p>
-          <h2>¿Qué vas a hacer ahora?</h2>
+        <div class="screen-top menu-hero">
+          <p class="overline">LA FRAGUA</p>
+          <h2>Encender la chispa</h2>
+          <p class="screen-copy">Elige cómo quieres empezar.</p>
           <p class="last-session" id="menuLastSession"></p>
         </div>
 
@@ -39,11 +49,11 @@
           </button>
           <button class="mode-card" type="button" data-mode="Organizar">
             <span class="mode-name">Organizar</span>
-            <span class="mode-desc">Orden rápido</span>
+            <span class="mode-desc">Preparar el terreno</span>
           </button>
           <button class="mode-card mode-card-wide" type="button" data-mode="Café">
             <span class="mode-name">Café</span>
-            <span class="mode-desc">Pausa antes de empezar</span>
+            <span class="mode-desc">Pausa para avivar</span>
           </button>
         </div>
       </section>
@@ -53,14 +63,14 @@
           <button class="ghost-button back-button" type="button" id="backToMenuFromDuration">Volver</button>
           <p class="overline" id="selectedModeLabel">Modo</p>
           <h2>¿Cuánto tiempo quieres dedicarle?</h2>
-          <p class="last-session" id="durationLastSession"></p>
+          <p class="screen-copy">Un bloque claro. Una cosa cada vez.</p>
         </div>
 
         <div class="duration-grid" aria-label="Selecciona duración">
           <button class="duration-button" type="button" data-minutes="15">15 min</button>
           <button class="duration-button" type="button" data-minutes="25">25 min</button>
           <button class="duration-button" type="button" data-minutes="45">45 min</button>
-          <button class="duration-button" type="button" data-minutes="90">90 min</button>
+          <button class="duration-button" type="button" data-minutes="60">60 min</button>
           <button class="duration-button custom-toggle" type="button" id="customToggle">Personalizado</button>
         </div>
 
@@ -71,23 +81,45 @@
             <input id="customMinutes" type="number" min="1" max="180" value="25" inputmode="numeric" />
           </label>
           <button class="step-button" type="button" id="plusMinutes" aria-label="Aumentar minutos">+</button>
-          <button class="primary-button custom-start" type="button" id="startCustom">Iniciar</button>
+          <button class="primary-button custom-start" type="button" id="startCustom">Empezar</button>
         </div>
       </section>
 
       <section class="screen timer-screen" id="timerScreen" data-screen="timer">
-        <div class="timer-panel">
+        <div class="timer-status-row">
           <p class="overline" id="timerModeLabel">Modo</p>
-          <div class="timer-ring" aria-hidden="true">
+          <p class="wake-status" id="wakeStatus">Pantalla activa</p>
+        </div>
+
+        <div class="timer-panel">
+          <div class="focus-orb timer-orb" aria-hidden="true">
             <span></span>
           </div>
           <p class="timer-display" id="timerDisplay">25:00</p>
-          <p class="motivation" id="motivationText">Una sesión. Una intención.</p>
+          <p class="worked-time" id="workedTime">Tiempo trabajado: 00:00</p>
+
+          <div class="ascuas-companion" id="ascuasCompanion">
+            <div class="ascuas-avatar" aria-hidden="true">
+              <img src="assets/ascuas.png" alt="" onerror="this.hidden = true; this.parentElement.classList.add('no-image');" />
+            </div>
+            <div class="ascuas-bubble" id="ascuasCard">
+              <strong>Ascuas dice:</strong>
+              <span id="ascuasMessage">Bien. Ya has encendido la primera chispa.</span>
+            </div>
+          </div>
         </div>
 
-        <div class="action-row">
-          <button class="secondary-button" type="button" id="pauseResume">Pausar</button>
-          <button class="ghost-button" type="button" id="finishSession">Terminar</button>
+        <div class="timer-bottom">
+          <div class="progress-area">
+            <div class="progress-track" aria-hidden="true">
+              <span id="progressBar"></span>
+            </div>
+            <div class="progress-marks" id="progressMarks" aria-hidden="true"></div>
+          </div>
+          <div class="action-row">
+            <button class="secondary-button" type="button" id="pauseResume">Pausar</button>
+            <button class="ghost-button" type="button" id="finishSession">Terminar</button>
+          </div>
         </div>
       </section>
 
@@ -97,18 +129,44 @@
           <h2 id="coffeeTitle">Disfruta.</h2>
           <p id="coffeeSubtitle">Tómate este momento antes de empezar.</p>
           <p class="coffee-timer" id="coffeeTimer">5:00</p>
+
+          <div class="ascuas-companion coffee-ascuas">
+            <div class="ascuas-avatar" aria-hidden="true">
+              <img src="assets/ascuas.png" alt="" onerror="this.hidden = true; this.parentElement.classList.add('no-image');" />
+            </div>
+            <div class="ascuas-bubble">
+              <strong>Ascuas dice:</strong>
+              <span id="coffeeAscuasMessage">Pausa breve. No te enfríes.</span>
+            </div>
+          </div>
         </div>
         <button class="primary-button bottom-button" type="button" id="coffeeDone">Vamos con ello</button>
       </section>
 
       <section class="screen complete-screen" id="completeScreen" data-screen="complete">
         <div class="complete-content">
-          <p class="overline">START MODE</p>
-          <h2>Sesión completada.</h2>
-          <p>Has cumplido con tu intención.</p>
+          <p class="overline">REGISTRO</p>
+          <h2>¿Qué has avanzado?</h2>
+          <p id="completeSummary">Trabajo · 25 min · completada</p>
+
+          <div class="ascuas-companion complete-ascuas">
+            <div class="ascuas-avatar" aria-hidden="true">
+              <img src="assets/ascuas.png" alt="" onerror="this.hidden = true; this.parentElement.classList.add('no-image');" />
+            </div>
+            <div class="ascuas-bubble">
+              <strong>Ascuas dice:</strong>
+              <span id="completeAscuasMessage">Sesión forjada. Ponle nombre si quieres encontrarla después.</span>
+            </div>
+          </div>
+
+          <label class="text-input-wrap note-input-wrap" for="sessionNoteInput">
+            <span>Nota breve</span>
+            <input id="sessionNoteInput" type="text" maxlength="120" autocomplete="off" placeholder="Ej: esquema terminado, primer boceto, escritorio despejado..." />
+          </label>
         </div>
-        <div class="action-row">
-          <button class="primary-button" type="button" id="newSession">Nueva sesión</button>
+        <div class="complete-actions">
+          <button class="primary-button" type="button" id="saveSessionNote">Guardar registro</button>
+          <button class="secondary-button" type="button" id="continueWithoutNote">Continuar</button>
           <button class="ghost-button" type="button" id="homeFromComplete">Volver al inicio</button>
         </div>
       </section>
