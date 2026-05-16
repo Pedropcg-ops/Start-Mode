@@ -1,177 +1,488 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#11100e" />
-    <title>Encender la chispa</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main class="app-shell" aria-live="polite">
-      <div class="ember-field" aria-hidden="true">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Landing premium para Pack Fusilero Titanium Series de O'Clock Airsoft.">
+  <title>O'Clock Airsoft | Pack Fusilero Titanium Series</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header" aria-label="Navegación principal">
+    <a class="site-header__brand" href="#top" aria-label="O'Clock Airsoft inicio">
+      <span class="brand-mark" aria-hidden="true">
+        <img class="brand-logo" src="assets/images/oclock-logo.png" alt="Logotipo de O'Clock Airsoft">
+      </span>
+      O'Clock Airsoft
+    </a>
+    <nav class="site-header__nav" aria-label="Secciones">
+      <a href="#pack-fusilero">Pack Fusilero</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#compatibilidad">Compatibilidad</a>
+    </nav>
+    <a class="site-header__cta" href="#comprar">Consultar</a>
+  </header>
+
+  <main id="top">
+    <section class="hero section-dark" aria-labelledby="hero-title">
+      <div class="hero__content page-shell">
+        <div class="hero__text">
+          <p class="eyebrow reveal">O'Clock Airsoft · Titanium Series</p>
+          <h1 id="hero-title" class="hero__title reveal">Pack Fusilero</h1>
+          <p class="hero__subtitle reveal">
+            Una preparación técnica pensada para usuarios que buscan respuesta, consistencia y fiabilidad en configuraciones exigentes.
+          </p>
+          <div class="hero__actions reveal">
+            <a class="button button--primary" href="#pack-fusilero">Ver Pack Fusilero</a>
+            <a class="button button--secondary" href="#comprar">Consultar compatibilidad</a>
+          </div>
+        </div>
+
+        <div class="hero__media reveal">
+          <div class="product-render product-render--hero image-panel">
+            <img class="visual-image visual-image--cover hero-pack-image" src="assets/images/pack-overview.JPG" alt="Réplica Titanium Series preparada por O'Clock Airsoft">
+          </div>
+        </div>
+      </div>
+      <a class="scroll-indicator" href="#concepto" aria-label="Bajar a la siguiente sección">
         <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      </a>
+    </section>
+
+    <section id="concepto" class="concept section-pad" aria-labelledby="concept-title">
+      <div class="concept__inner page-shell">
+        <div class="concept__text reveal">
+          <p class="section-kicker">Preparación como sistema</p>
+          <h2 id="concept-title">No es una suma de piezas</h2>
+          <p>
+            Pack Fusilero se plantea como una preparación completa. Cada componente tiene sentido dentro del conjunto: equilibrio, respuesta y consistencia antes que montaje por catálogo.
+          </p>
+          <blockquote class="concept__quote">El rendimiento real nace cuando todo trabaja en la misma dirección.</blockquote>
+        </div>
+        <div class="concept__media reveal">
+          <div class="technical-panel image-panel image-panel--bottom-fade">
+            <img class="visual-image visual-image--cover" src="assets/images/concept-system.jpg" alt="Sistema técnico de componentes trabajando en equilibrio">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pack-fusilero" class="pack-overview section-pad section-raised" aria-labelledby="pack-title">
+      <div class="pack-overview__inner page-shell">
+        <div class="pack-overview__media reveal">
+          <div class="pack-visual image-panel image-panel--bottom-fade">
+            <img class="visual-image visual-image--cover performance-image" src="assets/images/performance-detail.JPG" alt="Detalle técnico del Pack Fusilero Titanium Series">
+          </div>
+        </div>
+        <div class="pack-overview__content reveal">
+          <p class="section-kicker">Titanium Series</p>
+          <h2 id="pack-title">Pack Fusilero</h2>
+          <p>
+            Una configuración orientada a mejorar la respuesta, la estabilidad mecánica y la confianza del usuario en partidas dinámicas. No se plantea como una simple suma de piezas, sino como una preparación completa con criterio técnico.
+          </p>
+          <ul class="feature-list" aria-label="Ventajas principales del Pack Fusilero">
+            <li class="feature-list__item">Respuesta más directa</li>
+            <li class="feature-list__item">Preparación técnica equilibrada</li>
+            <li class="feature-list__item">Componentes seleccionados por rendimiento</li>
+            <li class="feature-list__item">Pensado para uso dinámico y exigente</li>
+            <li class="feature-list__item">Montaje y ajuste con criterio de taller</li>
+          </ul>
+          <div class="pack-overview__buy">
+            <a class="button button--primary" href="#comprar">Consultar Pack Fusilero</a>
+            <a class="button button--secondary" href="#comprar">Preguntar compatibilidad</a>
+          </div>
+        </div>
       </div>
 
-      <section class="screen intro-screen is-active" id="introScreen" data-screen="intro">
-        <div class="focus-orb" aria-hidden="true">
-          <span></span>
-        </div>
-        <h1>Encender la chispa</h1>
-        <p>Elige cómo quieres empezar.</p>
-      </section>
+    </section>
 
-      <section class="screen menu-screen" id="menuScreen" data-screen="menu">
-        <div class="screen-top menu-hero">
-          <p class="overline">LA FRAGUA</p>
-          <h2>Encender la chispa</h2>
-          <p class="screen-copy">Elige cómo quieres empezar.</p>
-          <p class="last-session" id="menuLastSession"></p>
+    <section id="componentes" class="components section-pad" aria-labelledby="components-title">
+      <div class="components__inner page-shell">
+        <div class="components__intro reveal">
+          <p class="section-kicker">Componentes incluidos</p>
+          <h2 id="components-title">Algunos de los componentes con los que cuenta el Pack Fusilero</h2>
+          <p>
+            La selección de piezas no busca llenar una lista. Busca que cada elemento aporte al comportamiento final de la réplica.
+          </p>
         </div>
 
-        <div class="mode-grid" aria-label="Selecciona un modo">
-          <button class="mode-card" type="button" data-mode="Trabajo">
-            <span class="mode-name">Trabajo</span>
-            <span class="mode-desc">Prioridad clara</span>
-          </button>
-          <button class="mode-card" type="button" data-mode="Estudio">
-            <span class="mode-name">Estudio</span>
-            <span class="mode-desc">Atención sostenida</span>
-          </button>
-          <button class="mode-card" type="button" data-mode="Crear">
-            <span class="mode-name">Crear</span>
-            <span class="mode-desc">Idea en marcha</span>
-          </button>
-          <button class="mode-card" type="button" data-mode="Organizar">
-            <span class="mode-name">Organizar</span>
-            <span class="mode-desc">Preparar el terreno</span>
-          </button>
-          <button class="mode-card mode-card-wide" type="button" data-mode="Café">
-            <span class="mode-name">Café</span>
-            <span class="mode-desc">Pausa para avivar</span>
-          </button>
-        </div>
-      </section>
-
-      <section class="screen duration-screen" id="durationScreen" data-screen="duration">
-        <div class="screen-top">
-          <button class="ghost-button back-button" type="button" id="backToMenuFromDuration">Volver</button>
-          <p class="overline" id="selectedModeLabel">Modo</p>
-          <h2>¿Cuánto tiempo quieres dedicarle?</h2>
-          <p class="screen-copy">Un bloque claro. Una cosa cada vez.</p>
+        <div class="components__showcase reveal" aria-hidden="true">
+          <img src="assets/images/component-piston-head.png" alt="Cabeza de pistón del Pack Fusilero">
+          <img src="assets/images/component-cylinder-head.png" alt="Cabeza de cilindro del Pack Fusilero">
+          <img src="assets/images/component-nozzle.png" alt="Cilindro del monobloque del Pack Fusilero">
+          <img src="assets/images/component-spring-guide.png" alt="Guía de muelle del Pack Fusilero">
+          <img src="assets/images/component-piston.png" alt="Pistón del Pack Fusilero">
+          <img src="assets/images/component-extra.png" alt="Elemento de ajuste del Pack Fusilero">
+          <img src="assets/images/motor-brushless.png" alt="Motor Brushless del Pack Fusilero">
+          <img src="assets/images/Engranajes-Raccoon.png" alt="Engranajes para réplica AEG">
         </div>
 
-        <div class="duration-grid" aria-label="Selecciona duración">
-          <button class="duration-button" type="button" data-minutes="15">15 min</button>
-          <button class="duration-button" type="button" data-minutes="25">25 min</button>
-          <button class="duration-button" type="button" data-minutes="45">45 min</button>
-          <button class="duration-button" type="button" data-minutes="60">60 min</button>
-          <button class="duration-button custom-toggle" type="button" id="customToggle">Personalizado</button>
+        <div class="components__list">
+          <article class="component-card reveal">
+            <div class="component-card__media">
+              <img src="assets/images/component-piston-head.png" alt="Cabeza de pistón del Pack Fusilero">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">01</p>
+              <h3 class="component-card__title">Cabeza de pistón Joule Master</h3>
+              <p class="component-card__text">Juega con cualquier peso de bola. Se ajusta sola dependiendo de la réplica gracias a la transmisión de energía por su avanzada tecnología.</p>
+              <p class="component-card__benefit">Beneficio: adaptación inteligente y entrega más constante.</p>
+            </div>
+          </article>
+          <article class="component-card reveal">
+            <div class="component-card__media">
+              <img src="assets/images/component-cylinder-head.png" alt="Cabeza de cilindro del Pack Fusilero">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">02</p>
+              <h3 class="component-card__title">Cabeza de cilindro</h3>
+              <p class="component-card__text">Pieza clave dentro del conjunto neumático. Su ajuste correcto ayuda a mejorar el sellado interno, estabilizar la salida de aire y trabajar en conjunto con el nozzle y la cabeza de pistón.</p>
+              <p class="component-card__benefit">Beneficio: mejor sellado y transferencia de aire más estable.</p>
+            </div>
+          </article>
+          <article class="component-card component-card--compact-title reveal">
+            <div class="component-card__media">
+              <img src="assets/images/component-nozzle.png" alt="Cilindro del monobloque del Pack Fusilero">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">03</p>
+              <h3 class="component-card__title">Cilindro del monobloque</h3>
+              <p class="component-card__text">Elemento del conjunto neumático integrado en el monobloque. Su ajuste ayuda a mantener una compresión estable, reducir pérdidas de aire y trabajar correctamente con el resto del sistema.</p>
+              <p class="component-card__benefit">Beneficio: compresión más estable y mejor aprovechamiento del aire.</p>
+            </div>
+          </article>
+          <article class="component-card reveal">
+            <div class="component-card__media">
+              <img src="assets/images/component-spring-guide.png" alt="Guía de muelle del Pack Fusilero">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">04</p>
+              <h3 class="component-card__title">Guía de muelle</h3>
+              <p class="component-card__text">Aporta estabilidad al muelle durante el ciclo. Puede ser regulable o no según la configuración, pero es un elemento fundamental para mantener un movimiento más estable del conjunto.</p>
+              <p class="component-card__benefit">Beneficio: recorrido suave y controlado del pistón.</p>
+            </div>
+          </article>
+          <article class="component-card reveal">
+            <div class="component-card__media">
+              <img src="assets/images/component-piston.png" alt="Pistón del Pack Fusilero">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">05</p>
+              <h3 class="component-card__title">Pistón reforzado</h3>
+              <p class="component-card__text">Selección entre SHS, RetroArms o FPS según la configuración. Puede recibir mecanizado y termofundido por inducción para mejorar resistencia y adaptación al sistema.</p>
+              <p class="component-card__benefit">Beneficio: vida útil extendida y compatibilidad garantizada.</p>
+            </div>
+          </article>
+          <article class="component-card reveal">
+            <div class="component-card__media">
+              <img src="assets/images/component-extra.png" alt="Elemento de ajuste del Pack Fusilero">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">06</p>
+              <h3 class="component-card__title">Gatillo electrónico Leviathan</h3>
+              <p class="component-card__text">Uno de los sistemas electrónicos más avanzados del mercado. Utiliza un micropulsador mediante clic para ofrecer máxima fiabilidad y control total del disparo, con recorrido ajustable. Control total por Bluetooth desde tu smartphone.</p>
+              <p class="component-card__benefit">Beneficio: respuesta más limpia y control super preciso.</p>
+            </div>
+          </article>
+          <article class="component-card reveal">
+            <div class="component-card__media">
+              <img src="assets/images/motor-brushless.png" alt="Motor Brushless del Pack Fusilero">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">07</p>
+              <h3 class="component-card__title">Motor Brushless</h3>
+              <p class="component-card__text">Libera toda la potencia de tu réplica. Motor sin escobillas que no te limita ni se calienta, evitando los problemas habituales.</p>
+              <p class="component-card__benefit">Beneficio: entrega más eficiente, estable y preparada para uso exigente.</p>
+            </div>
+          </article>
+          <article class="component-card reveal">
+            <div class="component-card__media">
+              <img src="assets/images/Engranajes-Raccoon.png" alt="Engranajes para réplica AEG">
+            </div>
+            <div class="component-card__body">
+              <p class="component-card__number">08</p>
+              <h3 class="component-card__title">Engranajes según réplica</h3>
+              <p class="component-card__text">Se elige entre SHS, Saigo CNC, Pandora o Titanium Series aligerados según el objetivo de respuesta, fiabilidad y configuración interna de cada réplica.</p>
+              <p class="component-card__benefit">Beneficio: transmisión eficiente y respuesta ajustada al montaje.</p>
+            </div>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <div class="custom-duration" id="customDuration" hidden>
-          <button class="step-button" type="button" id="minusMinutes" aria-label="Reducir minutos">-</button>
-          <label class="custom-input-wrap">
-            <span>Minutos</span>
-            <input id="customMinutes" type="number" min="1" max="180" value="25" inputmode="numeric" />
+    <section class="benefits section-pad section-raised" aria-labelledby="benefits-title">
+      <div class="page-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Beneficios técnicos</p>
+          <h2 id="benefits-title">Lo que mejora en el conjunto</h2>
+        </div>
+        <div class="benefits__visual image-panel image-panel--bottom-fade reveal">
+          <img class="visual-image visual-image--cover performance-image" src="assets/images/performance-detail.JPG" alt="Detalle de rendimiento del Pack Fusilero centrado en respuesta y consistencia">
+        </div>
+        <div class="benefits__grid">
+          <article class="benefit-card reveal">
+            <span class="benefit-card__icon" aria-hidden="true"></span>
+            <h3 class="benefit-card__title">Respuesta más directa</h3>
+            <p class="benefit-card__text">Una configuración correctamente equilibrada reduce pérdidas innecesarias y permite que la réplica transmita una sensación de disparo más inmediata y controlada.</p>
+            <p class="benefit-card__benefit">Respuesta instantánea.</p>
+          </article>
+          <article class="benefit-card reveal">
+            <span class="benefit-card__icon" aria-hidden="true"></span>
+            <h3 class="benefit-card__title">Mayor consistencia</h3>
+            <p class="benefit-card__text">La mejora del conjunto neumático y mecánico ayuda a reducir variaciones entre disparos, favoreciendo una trayectoria más repetible.</p>
+            <p class="benefit-card__benefit">Mejor agrupación a largas distancias.</p>
+          </article>
+          <article class="benefit-card reveal">
+            <span class="benefit-card__icon" aria-hidden="true"></span>
+            <h3 class="benefit-card__title">Mejor eficiencia neumática</h3>
+            <p class="benefit-card__text">El sellado y la compresión permiten aprovechar mejor el aire disponible, reducir pérdidas de energía y mejorar la estabilidad general del sistema.</p>
+            <p class="benefit-card__benefit">Más energía útil en cada disparo.</p>
+          </article>
+          <article class="benefit-card reveal">
+            <span class="benefit-card__icon" aria-hidden="true"></span>
+            <h3 class="benefit-card__title">Ajustes propios de relojería</h3>
+            <p class="benefit-card__text">Cada montaje se plantea con criterio técnico, comprobando compatibilidad, ajuste y funcionamiento del conjunto antes de darlo por terminado.</p>
+            <p class="benefit-card__benefit">Menos montaje sin criterio, más ajuste real.</p>
+          </article>
+          <article class="benefit-card reveal benefit-card--wide">
+            <span class="benefit-card__icon" aria-hidden="true"></span>
+            <h3 class="benefit-card__title">Preparación revisada</h3>
+            <p class="benefit-card__text">Cada configuración debe comprobarse, ajustarse y validarse desde el criterio del taller.</p>
+          </article>
+        </div>
+        <div class="benefits-data reveal" aria-label="Datos prácticos del Pack Fusilero">
+          <div><span>Enfoque</span><strong>Respuesta / consistencia / fiabilidad</strong></div>
+          <div><span>Uso</span><strong>Fusilero</strong></div>
+          <div><span>Instalación</span><strong>Técnica recomendada</strong></div>
+          <div><span>Ajuste</span><strong>Según réplica y configuración</strong></div>
+        </div>
+        <div class="other-configs reveal" aria-labelledby="other-configs-title">
+          <p class="section-kicker">Otras configuraciones disponibles</p>
+          <h3 id="other-configs-title">Preparaciones según uso</h3>
+          <div class="other-configs__grid">
+            <a class="config-card reveal" href="pack-cqb.html">
+              <span class="config-card__line" aria-hidden="true"></span>
+              <h4>Pack CQB</h4>
+              <p>Respuesta rápida y control en distancias cortas.</p>
+            </a>
+            <a class="config-card reveal" href="pack-dmr.html">
+              <span class="config-card__line" aria-hidden="true"></span>
+              <h4>Pack DMR</h4>
+              <p>Estabilidad, consistencia y rendimiento con bola pesada.</p>
+            </a>
+            <a class="config-card reveal" href="pack-soporte.html">
+              <span class="config-card__line" aria-hidden="true"></span>
+              <h4>Pack Soporte</h4>
+              <p>Fiabilidad y cadencia sostenida.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="philosophy section-pad" aria-labelledby="philosophy-title">
+      <div class="philosophy__inner page-shell">
+        <div class="philosophy__media reveal">
+          <figure class="lab-visual image-panel image-panel--bottom-fade">
+            <img class="visual-image visual-image--cover" src="assets/images/design-philosophy.png" alt="Esquema técnico de funcionamiento interno del Pack Fusilero">
+            <figcaption class="lab-visual__readout">Esquema técnico de funcionamiento interno</figcaption>
+          </figure>
+        </div>
+        <div class="philosophy__content reveal">
+          <p class="section-kicker">Diseñado como sistema</p>
+          <h2 id="philosophy-title">Cada pieza tiene una función</h2>
+          <p>
+            El resultado no depende solo de la calidad individual de cada componente, sino de cómo trabajan juntos dentro del ciclo mecánico.
+          </p>
+          <blockquote class="philosophy__quote">
+            La diferencia no está en montar más piezas. Está en que trabajen como una sola.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section id="compatibilidad" class="compatibility section-pad section-raised" aria-labelledby="compatibility-title">
+      <div class="page-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Criterio técnico / compatibilidad</p>
+          <h2 id="compatibility-title">Criterio técnico antes que montaje por catálogo</h2>
+          <p>
+            Antes de recomendar una configuración, importa entender la base de la réplica, el uso previsto y el comportamiento que busca el jugador.
+          </p>
+        </div>
+        <div class="compatibility__media image-panel image-panel--bottom-fade reveal">
+          <img class="visual-image visual-image--cover" src="assets/images/compatibility-aeg.JPG" alt="Réplica AEG en contexto técnico de taller para revisar compatibilidad">
+        </div>
+        <div class="compatibility__grid">
+          <article class="compatibility-card reveal">
+            <p class="compatibility-card__label">Evaluación</p>
+            <p class="compatibility-card__value">Evaluación de la réplica antes de definir la preparación.</p>
+          </article>
+          <article class="compatibility-card reveal">
+            <p class="compatibility-card__label">Compatibilidad</p>
+            <p class="compatibility-card__value">Compatibilidad de piezas según plataforma, gearbox y medidas internas.</p>
+          </article>
+          <article class="compatibility-card reveal">
+            <p class="compatibility-card__label">Ajuste</p>
+            <p class="compatibility-card__value">Ajuste del conjunto para que los componentes trabajen de forma coherente.</p>
+          </article>
+          <article class="compatibility-card reveal">
+            <p class="compatibility-card__label">Prueba</p>
+            <p class="compatibility-card__value">Prueba de funcionamiento y revisión del comportamiento general.</p>
+          </article>
+          <article class="compatibility-card reveal compatibility-card--wide">
+            <p class="compatibility-card__label">Recomendación</p>
+            <p class="compatibility-card__value">Recomendación según uso, configuración buscada y estado real de la réplica.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="specs" class="specs section-pad" aria-labelledby="specs-title">
+      <div class="specs__inner page-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Ficha técnica útil</p>
+          <h2 id="specs-title">Información práctica para decidir</h2>
+        </div>
+        <div class="specs__cards reveal">
+          <article class="spec-card">
+            <h3>Para quién es</h3>
+            <p>Usuarios que buscan una preparación de fusilero equilibrada, con mejor respuesta y mayor confianza mecánica.</p>
+          </article>
+          <article class="spec-card">
+            <h3>Qué incluye</h3>
+            <p>Componentes seleccionados según configuración y compatibilidad de la réplica.</p>
+          </article>
+          <article class="spec-card">
+            <h3>Qué se revisa</h3>
+            <p>Compresión, ajuste, compatibilidad, respuesta, alimentación y comportamiento general.</p>
+          </article>
+          <article class="spec-card">
+            <h3>Instalación</h3>
+            <p>Recomendable instalación técnica para asegurar el ajuste correcto.</p>
+          </article>
+          <article class="spec-card">
+            <h3>Compatibilidad</h3>
+            <p>Depende de la plataforma, gearbox y medidas internas de la réplica.</p>
+          </article>
+          <article class="spec-card">
+            <h3>Antes de comprar</h3>
+            <p>Consulta compatibilidad para evitar montar piezas sin criterio.</p>
+          </article>
+        </div>
+        <a class="button button--secondary specs__cta reveal" href="#comprar">Consultar mi réplica</a>
+      </div>
+    </section>
+
+    <section id="comprar" class="final-cta section-pad" aria-labelledby="final-title">
+      <div class="final-cta__inner page-shell reveal">
+        <p class="section-kicker">O'Clock Airsoft</p>
+        <h2 id="final-title" class="final-cta__title">Prepara tu réplica con criterio</h2>
+        <p class="final-cta__text">
+          Cuéntanos qué base tienes, qué uso le das y qué comportamiento buscas. Te orientamos antes de montar piezas sin sentido.
+        </p>
+        <div class="final-cta__actions">
+          <button class="button button--primary" type="button" data-modal-open>Consultar compatibilidad</button>
+          <a class="button button--secondary" href="#pack-fusilero">Ver packs disponibles</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq section-pad section-raised" aria-labelledby="faq-title">
+      <div class="faq__inner page-shell">
+        <div class="section-heading reveal">
+          <p class="section-kicker">FAQ</p>
+          <h2 id="faq-title">Preguntas antes de instalar</h2>
+        </div>
+        <div class="faq__list reveal">
+          <article class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              <span>¿Es compatible con mi réplica?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Depende de la plataforma y de las medidas internas. La recomendación es confirmar compatibilidad antes de comprar el pack.</p>
+            </div>
+          </article>
+          <article class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              <span>¿Qué mejora exactamente Pack Fusilero?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Está orientado a mejorar respuesta, eficiencia neumática, consistencia entre disparos y confianza mecánica en uso dinámico.</p>
+            </div>
+          </article>
+          <article class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              <span>¿Necesito instalación profesional?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Es recomendable si se busca un ajuste correcto y una validación técnica del conjunto.</p>
+            </div>
+          </article>
+          <article class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              <span>¿Incluye todas las piezas necesarias?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Incluye los componentes definidos para la configuración. Algunas réplicas pueden requerir ajustes o piezas complementarias según su estado.</p>
+            </div>
+          </article>
+          <article class="faq__item">
+            <button class="faq__question" type="button" aria-expanded="false">
+              <span>¿Puedo consultarlo antes de comprar?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Sí. La landing está preparada para enlazar con un formulario, WhatsApp o flujo de consulta técnica.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="consult-modal" id="compatibility-modal" aria-hidden="true">
+    <div class="consult-modal__backdrop" data-modal-close></div>
+    <section class="consult-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="compatibility-modal-title">
+      <button class="consult-modal__close" type="button" aria-label="Cerrar formulario" data-modal-close></button>
+      <p class="section-kicker">Consulta técnica</p>
+      <h2 id="compatibility-modal-title">Cuéntanos qué réplica tienes</h2>
+      <p class="consult-modal__text">
+        Déjanos tus datos y la base de tu réplica para revisar compatibilidad antes de montar piezas sin criterio.
+      </p>
+      <form class="consult-form">
+        <label>
+          Nombre
+          <input type="text" name="nombre" autocomplete="name" required>
+        </label>
+        <label>
+          Réplica que tienes
+          <input type="text" name="replica" placeholder="Marca, modelo o plataforma" required>
+        </label>
+        <div class="consult-form__split">
+          <label>
+            Correo electrónico
+            <input type="email" name="email" autocomplete="email">
           </label>
-          <button class="step-button" type="button" id="plusMinutes" aria-label="Aumentar minutos">+</button>
-          <button class="primary-button custom-start" type="button" id="startCustom">Empezar</button>
-        </div>
-      </section>
-
-      <section class="screen timer-screen" id="timerScreen" data-screen="timer">
-        <div class="timer-status-row">
-          <p class="overline" id="timerModeLabel">Modo</p>
-          <p class="wake-status" id="wakeStatus">Pantalla activa</p>
-        </div>
-
-        <div class="timer-panel">
-          <div class="focus-orb timer-orb" aria-hidden="true">
-            <span></span>
-          </div>
-          <p class="timer-display" id="timerDisplay">25:00</p>
-          <p class="worked-time" id="workedTime">Tiempo trabajado: 00:00</p>
-
-          <div class="ascuas-companion" id="ascuasCompanion">
-            <div class="ascuas-avatar" aria-hidden="true">
-              <img src="assets/ascuas.png" alt="" onerror="this.hidden = true; this.parentElement.classList.add('no-image');" />
-            </div>
-            <div class="ascuas-bubble" id="ascuasCard">
-              <strong>Ascuas dice:</strong>
-              <span id="ascuasMessage">Bien. Ya has encendido la primera chispa.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="timer-bottom">
-          <div class="progress-area">
-            <div class="progress-track" aria-hidden="true">
-              <span id="progressBar"></span>
-            </div>
-            <div class="progress-marks" id="progressMarks" aria-hidden="true"></div>
-          </div>
-          <div class="action-row">
-            <button class="secondary-button" type="button" id="pauseResume">Pausar</button>
-            <button class="ghost-button" type="button" id="finishSession">Terminar</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="screen coffee-screen" id="coffeeScreen" data-screen="coffee">
-        <div class="coffee-content">
-          <p class="overline">PAUSA</p>
-          <h2 id="coffeeTitle">Disfruta.</h2>
-          <p id="coffeeSubtitle">Tómate este momento antes de empezar.</p>
-          <p class="coffee-timer" id="coffeeTimer">5:00</p>
-
-          <div class="ascuas-companion coffee-ascuas">
-            <div class="ascuas-avatar" aria-hidden="true">
-              <img src="assets/ascuas.png" alt="" onerror="this.hidden = true; this.parentElement.classList.add('no-image');" />
-            </div>
-            <div class="ascuas-bubble">
-              <strong>Ascuas dice:</strong>
-              <span id="coffeeAscuasMessage">Pausa breve. No te enfríes.</span>
-            </div>
-          </div>
-        </div>
-        <button class="primary-button bottom-button" type="button" id="coffeeDone">Vamos con ello</button>
-      </section>
-
-      <section class="screen complete-screen" id="completeScreen" data-screen="complete">
-        <div class="complete-content">
-          <p class="overline">REGISTRO</p>
-          <h2>¿Qué has avanzado?</h2>
-          <p id="completeSummary">Trabajo · 25 min · completada</p>
-
-          <div class="ascuas-companion complete-ascuas">
-            <div class="ascuas-avatar" aria-hidden="true">
-              <img src="assets/ascuas.png" alt="" onerror="this.hidden = true; this.parentElement.classList.add('no-image');" />
-            </div>
-            <div class="ascuas-bubble">
-              <strong>Ascuas dice:</strong>
-              <span id="completeAscuasMessage">Sesión forjada. Ponle nombre si quieres encontrarla después.</span>
-            </div>
-          </div>
-
-          <label class="text-input-wrap note-input-wrap" for="sessionNoteInput">
-            <span>Nota breve</span>
-            <input id="sessionNoteInput" type="text" maxlength="120" autocomplete="off" placeholder="Ej: esquema terminado, primer boceto, escritorio despejado..." />
+          <label>
+            WhatsApp
+            <input type="tel" name="whatsapp" autocomplete="tel">
           </label>
         </div>
-        <div class="complete-actions">
-          <button class="primary-button" type="button" id="saveSessionNote">Guardar registro</button>
-          <button class="secondary-button" type="button" id="continueWithoutNote">Continuar</button>
-          <button class="ghost-button" type="button" id="homeFromComplete">Volver al inicio</button>
-        </div>
-      </section>
-    </main>
+        <p class="consult-form__hint">Puedes dejar correo, WhatsApp o ambos.</p>
+        <button class="button button--primary" type="submit">Enviar consulta</button>
+        <p class="consult-form__status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
+
+
+
